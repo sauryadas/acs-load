@@ -12,11 +12,11 @@ Lets get started by doing a load test against a blog hosted on
 github.io.
 
 ```
-docker run rgardler/acs-load rgardler.github.io
+docker run rgardler/acs-load http://rgardler.github.io
 ```
 
-Depending on the configuration of your test this command may take some
-time to run. The output of this command will look something like:
+This will make three requests for `http://rgardler.github.io`. The
+output of this command will look something like:
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -31,12 +31,22 @@ time to run. The output of this command will look something like:
 You can save this output to a file with the following command:
 
 ```
-docker run rgardler/acs-load rgardler.github.io jmeter.jtl
+docker run rgardler/acs-load http://rgardler.github.io > results.xml
 ```
 
 This output can be processed in a number of ways, including loading
 into a listener in the JMeter GUI or processing with command line
 tools.
+
+# Configuring the Load Tests
+
+There are a number of optional parameters that can be passed to
+configure the tests:
+
+|Parameter | Description | Default|
+|----------|-------------|--------|
+|-t or --threads | Number of threads to run concurrently | 1 |
+|-l or --loops | Number of times each thread should loop | 3 |
 
 # Building the Container
 
